@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image-x/png" href="../static/image/icone.ico">
+    <title>WSD - Galeria</title>
+    <!-- Tabelas-->
+    <link href="../static/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <main class="menu-infos">
+        <div  class="titulo">
+            <h1>Galeria WSD</h1>
+        </div>
+        <div class="pagination">
+            {% if pagina > 1 %}
+                <a href="{{ url_for('galeriadeimagens', pagina=pagina-1) }}">&laquo; Anterior</a>
+            {% endif %}
+            {% for p in range(1, total_paginas + 1) %}
+                <a href="{{ url_for('galeriadeimagens', pagina=p) }}" class="{{ 'active' if p == pagina else '' }}">{{ p }}</a>
+            {% endfor %}
+            {% if pagina < total_paginas %}
+                <a href="{{ url_for('galeriadeimagens', pagina=pagina+1) }}">Próxima &raquo;</a>
+            {% endif %}
+        </div>
+        <div class="galeria-display">
+            {% for registro in registros %}
+                <div class="imagem-container">
+                    <img src="data:image/jpeg;base64,{{ registro[3] }}" alt="Imagem Capturada">
+                    <div class="rotulo">
+                        <p>{{ registro[1] }}</p>
+                        <form action="{{ url_for('remover_imagem', imagem_id=registro[0]) }}" method="POST">
+                            <button type="submit">Remover</button>
+                        </form>
+                    </div>               
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if pagina > 1 %}
+                <a href="{{ url_for('galeriadeimagens', pagina=pagina-1) }}">&laquo; Anterior</a>
+            {% endif %}
+            {% for p in range(1, total_paginas + 1) %}
+                <a href="{{ url_for('galeriadeimagens', pagina=p) }}" class="{{ 'active' if p == pagina else '' }}">{{ p }}</a>
+            {% endfor %}
+            {% if pagina < total_paginas %}
+                <a href="{{ url_for('galeriadeimagens', pagina=pagina+1) }}">Próxima &raquo;</a>
+            {% endif %}
+        </div>
+    </main>
+    {% endblock %}
+</body>
+</html>

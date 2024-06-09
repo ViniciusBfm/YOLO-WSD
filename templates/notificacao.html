@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image-x/png" href="../static/image/icone.ico">
+    <title>WSD - Notificações</title>
+    <!-- Tabelas-->
+    <link href="../static/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <main class="menu-infos">
+        <div  class="titulo">
+            <h1>Acesso a informações</h1>
+        </div>
+        <div class="title">
+            <div class="notificacoes-container">
+                <div class="notificacoes-container-titulo">
+                    <h3>Registro de notificações</h3>
+                </div>
+    
+                <div class="notificacoes-box-container">
+                    {% for notf in notificacao %}
+                        <div class="notificacoes-box">
+                            <div class="notificacoes-text">{{ notf[2] }}</div>
+                            <div class="notificacoes-hora">{{ notf[1] }}
+                                <div class="notificacoes-icon"><img src="../static/image/ver-img.png" alt="">
+                                    <div class="notificacoes-img">
+                                        <img src="data:image/jpeg;base64,{{ notf[3] }}" alt="Imagem Capturada">
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>                  
+                    {% endfor %}
+                </div>
+                
+            </div>
+            
+        </div>
+
+
+        
+
+    </main>
+    {% endblock %}
+</body>
+</html>
